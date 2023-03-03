@@ -1,0 +1,31 @@
+{
+  "name": "odin-linked-list",
+  "version": "1.0.0",
+  "description": "JS implementation of linked list",
+  "private": true,
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "testRegex": "tests/.*\\.(js|jsx)$"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ykoziy/odin-linked-list.git"
+  },
+  "author": "Yuriy Koziy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ykoziy/odin-linked-list/issues"
+  },
+  "homepage": "https://github.com/ykoziy/odin-linked-list#readme",
+  "devDependencies": {
+    "jest": "^29.4.3"
+  },
+  "dependencies": {
+    "@babel/preset-env": "^7.20.2",
+    "jest-babel": "^1.0.1"
+  }
+}
