@@ -71,8 +71,8 @@ export default class LinkedList {
   }
 
   pop() {
-    if (this.tailNode === null) {
-      return null;
+    if (this.headNode === null) {
+      return;
     }
     let currentNode = this.headNode;
     while (currentNode.nextNode != this.tailNode) {
@@ -109,7 +109,8 @@ export default class LinkedList {
 
   insertAt(value, searchIndex) {
     if (searchIndex === 0) {
-      this.prepend(value);
+      this.append(value);
+      return;
     } else {
       let currentNode = this.headNode;
       let index = 0;
@@ -121,12 +122,29 @@ export default class LinkedList {
       const next = currentNode.nextNode;
       currentNode.nextNode = newNode;
       newNode.nextNode = next;
+      if (this.nodeCount == searchIndex) {
+        this.tailNode = newNode;
+      }
     }
     this.nodeCount++;
   }
 
   removeAt(index) {
-    // implement me
-    return null;
+    if (this.headNode == null || index >= this.nodeCount) {
+      return;
+    }
+    if (index == 0) {
+      this.headNode = this.headNode.nextNode;
+    } else {
+      let currentNode = this.headNode;
+      for (let i = 0; i < index - 1; i++) {
+        currentNode = currentNode.nextNode;
+      }
+      currentNode.nextNode = currentNode.nextNode.nextNode;
+      if (index == this.nodeCount - 1) {
+        this.tailNode = currentNode;
+      }
+    }
+    this.nodeCount--;
   }
 }

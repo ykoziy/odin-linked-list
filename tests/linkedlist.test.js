@@ -93,11 +93,15 @@ describe('LinkedList', () => {
     expect(list.at(1)).toBe(6.3);
   });
 
+  test('at(0) returns null', () => {
+    expect(list.at(0)).toBeNull();
+  });
+
   test('at(100) returns null, since invalid index', () => {
     list.append('Bob');
     list.append(6.3);
     list.append(5);
-    expect(list.at(1)).toBe(6.3);
+    expect(list.at(100)).toBeNull();
   });
 
   test('prepend() appends to the front', () => {
@@ -126,6 +130,11 @@ describe('LinkedList', () => {
     expect(list.size()).toBe(2);
   });
 
+  test('pop() does nothing on empty list', () => {
+    list.pop();
+    expect(list.size()).toBe(0);
+  });
+
   test('insertAt() inserts at correct index', () => {
     list.append('Bob');
     list.append(6.3);
@@ -138,5 +147,83 @@ describe('LinkedList', () => {
     expect(list.at(2)).toBe('test');
     expect(list.at(3)).toBe(5);
     expect(list.size()).toBe(5);
+  });
+
+  test('insertAt() inserts correctly at the end', () => {
+    list.append('Bob');
+    list.append(6.3);
+    list.append(5);
+    list.append(66);
+
+    list.insertAt('test', list.size());
+
+    console.log(list.toString());
+
+    expect(list.at(3)).toBe(66);
+    expect(list.tail().value).toBe('test');
+    expect(list.size()).toBe(5);
+  });
+
+  test('insertAt() inserts at correct index, empty list', () => {
+    list.insertAt('test', 0);
+    expect(list.at(0)).toBe('test');
+    expect(list.size()).toBe(1);
+  });
+
+  test('removeAt() removes at correct index', () => {
+    list.append('Bob');
+    list.append(6.3);
+    list.append(5);
+    list.append(66);
+    list.append('end');
+
+    list.removeAt(2);
+
+    expect(list.at(1)).toBe(6.3);
+    expect(list.at(2)).toBe(66);
+    expect(list.at(3)).toBe('end');
+    expect(list.size()).toBe(4);
+  });
+
+  test('removeAt() removes at the end correctly', () => {
+    list.append('Bob');
+    list.append(6.3);
+    list.append(5);
+    list.append(66);
+    list.append('end');
+
+    list.removeAt(4);
+
+    expect(list.at(2)).toBe(5);
+    expect(list.tail().value).toBe(66);
+    expect(list.size()).toBe(4);
+  });
+
+  test('removeAt() removes at the start correctly', () => {
+    list.append('Bob');
+    list.append(6.3);
+    list.append(5);
+    list.append(66);
+    list.append('end');
+
+    list.removeAt(0);
+
+    expect(list.at(1)).toBe(5);
+    expect(list.head().value).toBe(6.3);
+    expect(list.size()).toBe(4);
+  });
+
+  test('removeAt() does nothing on invalid index', () => {
+    list.append('Bob');
+    list.append(6.3);
+
+    list.removeAt(50);
+
+    expect(list.size()).toBe(2);
+  });
+
+  test('removeAt() does nothing on empty list', () => {
+    list.removeAt(0);
+    expect(list.size()).toBe(0);
   });
 });
